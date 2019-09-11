@@ -1,4 +1,4 @@
-package telekingdom;
+package games.telekingdom;
 
 import java.io.File;
 
@@ -15,7 +15,7 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import app.AppLoader;
 
-import telekingdom.hud.Interface;
+import games.telekingdom.hud.Interface;
 
 public class World extends BasicGameState {
 
@@ -99,7 +99,7 @@ public class World extends BasicGameState {
 	@Override
 	public void update (GameContainer container, StateBasedGame game, int delta) {
 		/* Méthode exécutée environ 60 fois par seconde */
-		Input input = container.getInput ();
+		AppInput input = (AppInput) container.getInput ();
 		if (input.isKeyPressed (Input.KEY_ESCAPE)) {
 			this.setState (2);
 			game.enterState (2, new FadeOutTransition (), new FadeInTransition ());

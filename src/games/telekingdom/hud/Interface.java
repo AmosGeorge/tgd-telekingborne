@@ -1,4 +1,4 @@
-package telekingdom.hud;
+package games.telekingdom.hud;
 
 import java.util.List;
 
@@ -10,8 +10,8 @@ import org.newdawn.slick.state.StateBasedGame;
 
 import app.AppLoader;
 
-import telekingdom.Player;
-import telekingdom.World;
+import games.telekingdom.Player;
+import games.telekingdom.World;
 
 public class Interface {
 

@@ -1,11 +1,11 @@
-package telekingdom.hud;
+package games.telekingdom.hud;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.state.StateBasedGame;
 
-import telekingdom.World;
+import games.telekingdom.World;
 
 public class Request {
 

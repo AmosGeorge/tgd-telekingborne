@@ -10,7 +10,7 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 import app.AppMenu;
 import app.elements.MenuItem;
 
-import telekingdom.World;
+import games.telekingdom.World;
 
 public class Choice extends AppMenu {
 

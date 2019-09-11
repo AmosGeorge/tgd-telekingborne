@@ -1,4 +1,4 @@
-package telekingdom.hud;
+package games.telekingdom.hud;
 
 
 import org.newdawn.slick.Color;
@@ -10,7 +10,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
 import org.newdawn.slick.state.StateBasedGame;
 
-import telekingdom.World;
+import games.telekingdom.World;
 
 public class Card {
 

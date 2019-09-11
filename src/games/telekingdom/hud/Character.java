@@ -1,4 +1,4 @@
-package telekingdom.hud;
+package games.telekingdom.hud;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

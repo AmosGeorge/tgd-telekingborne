@@ -1,7 +1,7 @@
 [
 	{
 		"character": 0,
-		"request": "Le dépouillement des votes touche presque à sa fin. Rien n'est encore gagné pour vous qui détournez avec inquiétude votre regard du tableau où s'allongent interminablement deux rangées de traits verticaux que plus personne ne parvient à comptabiliser. A la recherche d'un soutien psychologique, vous posez finalement vos yeux sur la fenêtre où se reflète Nestor, candidat à la direction de TeleKingdom. C'est bien votre image que vous contemplez, mais celle-ci vous donne l'impression indescriptible de vous remettre en question : êtes-vous prêt à diriger cette école ?",
+		"request": "Le dépouillement des votes touche presque à sa fin. Rien n'est encore gagné pour vous qui détournez avec inquiétude votre regard du tableau où s'allongent interminablement deux rangées de traits verticaux que plus personne ne parvient à comptabiliser. A la recherche d'un soutien psychologique, vous posez finalement vos yeux sur la fenêtre où se reflète Nestor, candidat à la direction de games.telekingdom. C'est bien votre image que vous contemplez, mais celle-ci vous donne l'impression indescriptible de vous remettre en question : êtes-vous prêt à diriger cette école ?",
 		"response": ["De l'air, vite !", "L'avenir du monde dépend de nous !"],
 		"effect": [[0, -20, 0], [0, 10, 0]],
 		"next": [[[6], [1, -1]], [[1,0], [2, -20], [3, -60], [4, 50], [5,30], [8,-1], [9,70]]]

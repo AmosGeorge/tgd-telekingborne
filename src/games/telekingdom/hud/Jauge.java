@@ -1,4 +1,4 @@
-package telekingdom.hud;
+package games.telekingdom.hud;
 
 import java.io.File;
 
@@ -11,8 +11,8 @@ import org.newdawn.slick.state.StateBasedGame;
 
 import app.AppLoader;
 
-import telekingdom.Player;
-import telekingdom.World;
+import games.telekingdom.Player;
+import games.telekingdom.World;
 
 public class Jauge {
 

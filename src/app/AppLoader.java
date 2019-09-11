@@ -19,90 +19,90 @@ public class AppLoader {
 		AppLoader.fontList = new HashMap <String, Map <Integer, Map <Integer, AppFont>>> ();
 		AppLoader.pictureList = new HashMap <String, AppPicture> ();
 		AppLoader.audioList = new HashMap <String, AppAudio> ();
-		SoundStore.get ().init ();
+		SoundStore.get().init();
 	}
 
-	private static InputStream openStream (String filename) {
+	private static InputStream openStream(String filename) {
 		InputStream stream = null;
-		if (filename != null && filename.startsWith ("/")) {
+		if (filename != null && filename.startsWith("/")) {
 			try {
-				stream = new FileInputStream (System.class.getResource (filename).getPath ());
+				stream = new FileInputStream(System.class.getResource(filename).getPath());
 			} catch (Exception error) {}
 			if (stream == null) {
 				try {
-					stream = ResourceLoader.getResourceAsStream (filename.replaceAll ("/+", "/").substring (1).replace ("/", File.separator));
+					stream = ResourceLoader.getResourceAsStream(filename.replaceAll("/+", "/").substring(1).replace("/", File.separator));
 				} catch (Exception error) {}
 			}
 		}
 		return stream;
 	}
 
-	private static void closeStream (InputStream stream) {
+	private static void closeStream(InputStream stream) {
 		try {
-			stream.close ();
+			stream.close();
 		} catch (Exception error) {}
 	}
 
-	public static AppFont loadFont (String filename, int type, int size) {
+	public static AppFont loadFont(String filename, int type, int size) {
 		Map <Integer, Map <Integer, AppFont>> types = null;
-		if ((types = AppLoader.fontList.get (filename)) == null) {
+		if ((types = AppLoader.fontList.get(filename)) == null) {
 			types = new HashMap <Integer, Map <Integer, AppFont>> ();
-			AppLoader.fontList.put (filename, types);
+			AppLoader.fontList.put(filename, types);
 		}
 		Map <Integer, AppFont> sizes = null;
-		if ((sizes = types.get (type)) == null) {
+		if ((sizes = types.get(type)) == null) {
 			sizes = new HashMap <Integer, AppFont> ();
-			types.put (type, sizes);
+			types.put(type, sizes);
 		}
-		AppFont resource = sizes.get (size);
+		AppFont resource = sizes.get(size);
 		if (resource == null) {
-			InputStream stream = AppLoader.openStream (filename);
+			InputStream stream = AppLoader.openStream(filename);
 			if (stream != null) {
 				try {
-					resource = new AppFont (filename, stream, type, size);
+					resource = new AppFont(filename, stream, type, size);
 				} catch (Exception error) {}
-				AppLoader.closeStream (stream);
+				AppLoader.closeStream(stream);
 			}
 			if (resource == null) {
-				resource = new AppFont (filename, type, size);
+				resource = new AppFont(filename, type, size);
 			}
-			sizes.put (size, resource);
-		}
-		return resource;
-	}
-
-	public static AppPicture loadPicture (String filename) {
-		AppPicture resource = AppLoader.pictureList.get (filename);
-		if (resource == null) {
-			InputStream stream = AppLoader.openStream (filename);
-			if (stream != null) {
-				try {
-					resource = new AppPicture (filename, stream);
-				} catch (Exception error) {}
-				AppLoader.closeStream (stream);
-			}
-			if (resource == null) {
-				resource = new AppPicture (filename);
-			}
-			AppLoader.pictureList.put (filename, resource);
+			sizes.put(size, resource);
 		}
 		return resource;
 	}
 
-	public static AppAudio loadAudio (String filename) {
-		AppAudio resource = AppLoader.audioList.get (filename);
+	public static AppPicture loadPicture(String filename) {
+		AppPicture resource = AppLoader.pictureList.get(filename);
 		if (resource == null) {
-			InputStream stream = AppLoader.openStream (filename);
+			InputStream stream = AppLoader.openStream(filename);
 			if (stream != null) {
 				try {
-					resource = new AppAudio (filename, stream);
+					resource = new AppPicture(filename, stream);
 				} catch (Exception error) {}
-				AppLoader.closeStream (stream);
+				AppLoader.closeStream(stream);
 			}
 			if (resource == null) {
-				resource = new AppAudio (filename);
+				resource = new AppPicture(filename);
 			}
-			AppLoader.audioList.put (filename, resource);
+			AppLoader.pictureList.put(filename, resource);
+		}
+		return resource;
+	}
+
+	public static AppAudio loadAudio(String filename) {
+		AppAudio resource = AppLoader.audioList.get(filename);
+		if (resource == null) {
+			InputStream stream = AppLoader.openStream(filename);
+			if (stream != null) {
+				try {
+					resource = new AppAudio(filename, stream);
+				} catch (Exception error) {}
+				AppLoader.closeStream(stream);
+			}
+			if (resource == null) {
+				resource = new AppAudio(filename);
+			}
+			AppLoader.audioList.put(filename, resource);
 		}
 		return resource;
 	}

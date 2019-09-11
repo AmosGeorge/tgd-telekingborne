@@ -1,44 +1,26 @@
 import javax.swing.JOptionPane;
-
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
+import app.AppGame;
 
 public final class Main {
 
 	public static final void main (String [] arguments) throws SlickException {
-		String title = "TeleKingdom";
-		Object [] options = {
-			"Oui",
-			"Non"
-		};
-		int returnValue = JOptionPane.showOptionDialog (
-			null,
-			"Voulez-vous jouer en plein écran ?",
-			title,
-			JOptionPane.YES_NO_OPTION,
-			JOptionPane.QUESTION_MESSAGE,
-			null,
-			options,
-			options [0]
-		);
-		StateBasedGame game = new StateBasedGame (title) {
-
+		String title = "TéléKingdom";
+		int width = 1024;
+		int height = 768;
+		boolean fullscreen = true;
+		new AppGame(title, width, height, fullscreen) {
 			@Override
-			public void initStatesList (GameContainer container) {
-				this.addState (new pages.Welcome (0));
-				this.addState (new pages.Choice (1));
-				this.addState (new pages.Pause (2));
-				this.addState (new pages.Defeat (3));
-				this.addState (new telekingdom.World (4));
+			public void init() {
+				this.addState (new pages.Welcome (PAGES_WELCOME));
+				this.addState (new pages.Choice (PAGES_CHOICE));
+				this.addState (new pages.Pause (PAGES_PAUSE));
+				this.addState (new pages.Defeat (PAGES_DEFEAT));
+				this.addState (new games.telekingdom.World (PAGES_GAME));
 			}
-
 		};
-		AppGameContainer container = returnValue == 0 ? new AppGameContainer (game, 1920, 1080, true) : new AppGameContainer (game, 1280, 720, false);
-		container.setTargetFrameRate (60);
-		container.setVSync (true);
-		container.setShowFPS (false);
-		container.start ();
 	}
 }

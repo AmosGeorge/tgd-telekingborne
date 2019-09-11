@@ -31,7 +31,7 @@ public class Defeat extends AppMenu {
 
 	@Override
 	public void init (GameContainer container, StateBasedGame game) {
-		super.initSize (container, game, 600, 400);
+		super.initSize (container, game, 1024, 768);
 		super.init (container, game);
 		this.setTitle ("Fin du regne");
 		this.setSubtitle ("Le roi est mort, vive le roi !");
@@ -45,13 +45,11 @@ public class Defeat extends AppMenu {
 		// this.setHint ("HAVE A SNACK");
 	}
 
-	@Override
-	public void enter (GameContainer container, StateBasedGame game) {
+	public void play (GameContainer container, StateBasedGame game) {
 		music.loop (1, .3f);
 	}
 
-	@Override
-	public void leave (GameContainer container, StateBasedGame game) {
+	public void stop (GameContainer container, StateBasedGame game) {
 		music.stop ();
 	}
 
