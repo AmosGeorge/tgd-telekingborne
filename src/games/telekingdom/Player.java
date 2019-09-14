@@ -11,6 +11,8 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import pages.Defeat;
 
+import app.AppPlayer;
+
 import games.telekingdom.hud.Card;
 import games.telekingdom.hud.CardParams;
 import games.telekingdom.hud.CardTemplate;
@@ -25,9 +27,11 @@ public class Player{
 	private Boolean dead;
 
 	private World world;
+	private int controllerID;
 
-	public Player(World world) {
+	public Player(AppPlayer appPlayer, World world) {
 		this.world = world;
+		this.controllerID = appPlayer.getControllerID();
 
 //		Initialisation des jauges :
 		jauges = new ArrayList<Jauge>();	// L'ArrayList des jauges, sera passé à l'interface pour l'affichage
@@ -140,6 +144,10 @@ public class Player{
 
 	public void setActiveCard(Card activeCard) {
 		this.activeCard = activeCard;
+	}
+
+	public int getControllerID() {
+		return this.controllerID;
 	}
 
 }

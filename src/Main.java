@@ -1,18 +1,14 @@
-import javax.swing.JOptionPane;
-import org.newdawn.slick.AppGameContainer;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.state.StateBasedGame;
 import app.AppGame;
 
 public final class Main {
 
-	public static final void main (String [] arguments) throws SlickException {
+	public static final void main (String [] arguments) {
 		String title = "TéléKingdom";
 		int width = 1024;
 		int height = 768;
 		boolean fullscreen = true;
 		new AppGame(title, width, height, fullscreen) {
+
 			@Override
 			public void init() {
 				this.addState (new pages.Welcome (PAGES_WELCOME));

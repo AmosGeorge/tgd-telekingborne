@@ -13,11 +13,14 @@ import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
+import app.AppGame;
+import app.AppInput;
 import app.AppLoader;
+import app.AppWorld;
 
 import games.telekingdom.hud.Interface;
 
-public class World extends BasicGameState {
+public class World extends AppWorld {
 
 	public static Font fontJauges;
 	public static Font font;
@@ -34,9 +37,6 @@ public class World extends BasicGameState {
 		}
 	}
 
-	private int ID;
-	private int state;
-
 	private int width;
 	private int height;
 
@@ -46,64 +46,57 @@ public class World extends BasicGameState {
 	private boolean justLoaded = false;
 
 	public World (int ID) {
-		this.ID = ID;
-		this.state = -1;
-	}
-
-	@Override
-	public int getID () {
-		return this.ID;
+		super(ID);
 	}
 
 	@Override
 	public void init (GameContainer container, StateBasedGame game) {
 		/* Méthode exécutée une unique fois au chargement du programme */
+		super.init(container, game);
+
 		this.width = container.getWidth ();
 		this.height = container.getHeight ();
+	}
 
-		this.player = new Player(this);
+	@Override
+	public void play(GameContainer container, StateBasedGame game) {
+		/* Méthode exécutée une unique fois au début du jeu */
+		AppGame appGame = (AppGame) game;
+		this.player = new Player(appGame.appPlayers.get(0), this);
 		this.interf = new Interface(this,player);
+
+		if (!justLoaded) {
+			player.init();
+		} else {
+			player.getActiveCard().setPiocheeTrue();
+		}
+		justLoaded = false;
+		music.loop(1, .3f);
 	}
 
 	@Override
-	public void enter (GameContainer container, StateBasedGame game) {
-		/* Méthode exécutée à l'apparition de la page */
-		container.getInput ().clearKeyPressedRecord ();
-		if (this.state == 0) {
-			/* Exécuté une unique fois au lancement du jeu */
-			if (!justLoaded) {
-				player.init();
-			} else {
-				player.getActiveCard().setPiocheeTrue();
-			}
-			justLoaded=false;
-			music.loop (1, .3f);
-		} else if (this.state == 2) {
-			/* Exécuté lors de la reprise du jeu */
-			music.resume ();
-		}
+	public void resume(GameContainer container, StateBasedGame game) {
+		/* Méthode exécutée lors de la reprise du jeu */
+		music.resume();
 	}
 
 	@Override
-	public void leave (GameContainer container, StateBasedGame game) {
-		/* Méthode exécutée à la disparition de la page */
-		if (this.state == 1) {
-			/* Exécuté lors de la mise en pause du jeu */
-			music.pause ();
-		} else if (this.state == 3) {
-			/* Exécuté une unique fois à la fin du jeu */
-			music.stop ();
-		}
+	public void pause(GameContainer container, StateBasedGame game) {
+		/* Méthode exécutée lors de la mise en pause du jeu */
+		music.pause();
+	}
+
+	@Override
+	public void stop(GameContainer container, StateBasedGame game) {
+		/* Méthode exécutée une unique fois à la fin du jeu */
+		music.stop ();
 	}
 
 	@Override
 	public void update (GameContainer container, StateBasedGame game, int delta) {
 		/* Méthode exécutée environ 60 fois par seconde */
 		AppInput input = (AppInput) container.getInput ();
-		if (input.isKeyPressed (Input.KEY_ESCAPE)) {
-			this.setState (2);
-			game.enterState (2, new FadeOutTransition (), new FadeInTransition ());
-		}
+		
 
 		interf.update(container, game, delta);
 		//interf.addToArgent(-1); //debug
@@ -116,12 +109,10 @@ public class World extends BasicGameState {
 		interf.render(container, game, context);
 	}
 
-	public void setState (int state) {
-		this.state = state;
-	}
-
-	public int getState () {
-		return this.state;
+	@Override
+	public void poll(GameContainer container, StateBasedGame game, Input user) {
+		/* Méthode exécutée environ 60 fois par seconde */
+		super.poll(container, game, user);
 	}
 
 	public int getWidth() {

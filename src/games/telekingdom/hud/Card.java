@@ -10,6 +10,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
 import org.newdawn.slick.state.StateBasedGame;
 
+import app.AppInput;
 import games.telekingdom.World;
 
 public class Card {
@@ -79,7 +80,8 @@ public class Card {
 	}
 
 	public void update (GameContainer container, StateBasedGame game, int delta) {
-		Input input = container.getInput();
+		AppInput input = (AppInput) container.getInput();
+		int controllerID = w.getPlayer().getControllerID();
 		if (piochee) {
 
 			if(animGetIn) {
@@ -91,14 +93,14 @@ public class Card {
 					if (animGetOut) {
 						getOut(delta);
 					} else {
-						if (input.isKeyPressed(Input.KEY_LEFT) && !input.isKeyPressed(Input.KEY_RIGHT)) { //si on appuie sur gauche et pas droite
+						if (input.isButtonPressed(AppInput.BUTTON_ZL, controllerID) && !input.isButtonPressed(AppInput.BUTTON_ZR, controllerID)) { //si on appuie sur gauche et pas droite
 							if (state==-1) {
 								confirmLeft();
 							} else {
 								shiftLeft();
 							}
 						}
-						if (input.isKeyPressed(Input.KEY_RIGHT) && !input.isKeyPressed(Input.KEY_LEFT)) { //si on appuie sur droite et pas gauche
+						if (input.isButtonPressed(AppInput.BUTTON_ZR, controllerID) && !input.isButtonPressed(AppInput.BUTTON_ZL, controllerID)) { //si on appuie sur droite et pas gauche
 							if (state==1) {
 								confirmRight();
 							} else {
@@ -108,7 +110,6 @@ public class Card {
 					}
 				}
 			}
-
 		}
 	}
 
